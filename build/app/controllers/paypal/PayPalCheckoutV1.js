@@ -27,11 +27,10 @@ class PayPalCheckoutV1 {
     });
 
     if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'Validation fails' });
+      return res.status(400).json({ error: 'Validation fails body' });
     }
 
     const sess = req.session;
-
     if (!sess.tokenPP) {
       sess.tokenPP = await _Oauth2.default.call(void 0, req.headers.mode);
     }
@@ -139,7 +138,7 @@ class PayPalCheckoutV1 {
 
   async executePayment(req, res) {
     const schema = Yup.object().shape({
-      executeUrl: Yup.string().required(),
+      paymentId: Yup.string().required(),
       payerId: Yup.string().required(),
     });
 
@@ -153,7 +152,8 @@ class PayPalCheckoutV1 {
       sess.tokenPP = await _Oauth2.default.call(void 0, req.headers.mode);
     }
 
-    const { executeUrl, payerId } = req.body;
+    const { paymentId, payerId } = req.body;
+
     let headers;
 
     if (req.headers.mock) {
@@ -175,11 +175,32 @@ class PayPalCheckoutV1 {
     };
 
     try {
-      const { data } = await _paypal.sandbox.post(executeUrl, body, {
-        headers,
-      });
+      let response;
 
-      return res.json(data);
+      switch (req.headers.mode) {
+        case 'sandbox':
+          response = await _paypal.sandbox.post(
+            `/v1/payments/payment/${paymentId}/execute`,
+            body,
+            {
+              headers,
+            }
+          );
+          break;
+
+        case 'live':
+          response = await _paypal.live.post(
+            `/v1/payments/payment/${paymentId}/execute`,
+            body,
+            { headers }
+          );
+          break;
+
+        default:
+          break;
+      }
+
+      return res.json(response.data);
     } catch (err) {
       if (err.response.status >= 400) {
         return res.status(400).json({

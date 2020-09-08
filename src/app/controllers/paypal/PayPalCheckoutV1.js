@@ -142,8 +142,6 @@ class PayPalCheckoutV1 {
       payerId: Yup.string().required(),
     });
 
-    console.log(req.body);
-
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json({ error: 'Validation fails' });
     }
@@ -155,6 +153,7 @@ class PayPalCheckoutV1 {
     }
 
     const { paymentId, payerId } = req.body;
+
     let headers;
 
     if (req.headers.mock) {

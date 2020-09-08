@@ -11,6 +11,7 @@
     "queue": "node build/queue.js"
   },
   "dependencies": {
+    "@sentry/node": "^5.22.3",
     "axios": "^0.19.2",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
