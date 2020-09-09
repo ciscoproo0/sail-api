@@ -132,7 +132,7 @@ class PayPalCheckoutV1 {
     } catch (err) {
       return res
         .status(400)
-        .json({ message: 'PayPal Error', original_message: err });
+        .json({ message: 'PayPal Error', original_message: err.message });
     }
   }
 
@@ -246,7 +246,7 @@ class PayPalCheckoutV1 {
     } catch (err) {
       return res
         .status(400)
-        .json({ message: 'PayPal Error', original_message: err });
+        .json({ message: 'PayPal Error', original_message: err.message });
     }
   }
 }
