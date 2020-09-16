@@ -8,7 +8,7 @@
 
 This is part of a "playground" project to test PayPal APIs and connect to my front-end application.
 
-<p align="right"><a href="">Here </a>you will find all API requests and parameters</p>
+<p align="right"><a href="https://documenter.getpostman.com/view/4255399/TVKA3J8R#c0f616cf-a092-4a4e-b8d3-d21809517d08">Here </a>you will find all API requests and parameters</p>
 
 ##### Services and Endpoints:
 
