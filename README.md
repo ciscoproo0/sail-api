@@ -21,6 +21,12 @@ This is part of a "playground" project to test PayPal APIs and connect to my fro
       - Reference Transactions (billing agreement);
       - Calculated Financing Options (to get installments).
 
+- Braintree:
+    - Client-Token;
+    - Execute Transactions;
+    - Vaulting flow;
+    - Get Customer Info;
+    - Get Transaction Details;
 
 ---
 
