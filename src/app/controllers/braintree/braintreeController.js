@@ -106,7 +106,7 @@ class Braintree {
   }
 
   async getCustomerInfo(req, res) {
-    const { customerId } = req.body;
+    const { customerId } = req.query;
 
     const gateway = await startGateway(req.headers.mode, req.headers.type);
 
@@ -120,7 +120,7 @@ class Braintree {
   }
 
   async getTransactionDetails(req, res) {
-    const { transactionId } = req.body;
+    const { transactionId } = req.query;
 
     const gateway = await startGateway(req.headers.mode, req.headers.type);
 
