@@ -31,7 +31,7 @@ class Braintree {
       paymentMethodToken,
     } = req.body;
 
-    const gateway = await _gatewayController2.default.call(void 0, req.headers.mode);
+    const gateway = await _gatewayController2.default.call(void 0, req.headers.mode, req.headers.type);
 
     const response = await gateway.transaction.sale({
       amount,
@@ -74,7 +74,7 @@ class Braintree {
 
     const { nonce, amount, dataInfo, customer } = req.body;
 
-    const gateway = await _gatewayController2.default.call(void 0, req.headers.mode);
+    const gateway = await _gatewayController2.default.call(void 0, req.headers.mode, req.headers.type);
 
     const response = await gateway.transaction.sale({
       amount,
@@ -108,7 +108,7 @@ class Braintree {
   async getCustomerInfo(req, res) {
     const { customerId } = req.body;
 
-    const gateway = await _gatewayController2.default.call(void 0, req.headers.mode);
+    const gateway = await _gatewayController2.default.call(void 0, req.headers.mode, req.headers.type);
 
     const foundCustomer = await gateway.customer.find(customerId);
 
@@ -122,7 +122,7 @@ class Braintree {
   async getTransactionDetails(req, res) {
     const { transactionId } = req.body;
 
-    const gateway = await _gatewayController2.default.call(void 0, req.headers.mode);
+    const gateway = await _gatewayController2.default.call(void 0, req.headers.mode, req.headers.type);
 
     gateway.transaction.search(
       (search) => {
