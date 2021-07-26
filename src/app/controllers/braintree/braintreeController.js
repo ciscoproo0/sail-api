@@ -79,7 +79,7 @@ class Braintree {
     const response = await gateway.transaction.sale({
       amount,
       installments: {count: 4},
-      merchantAccountId: 'BRL',
+      merchantAccountId: 'BRL_Debito_Ready',
       paymentMethodNonce: nonce,
       deviceData: dataInfo || null,
       customer,
